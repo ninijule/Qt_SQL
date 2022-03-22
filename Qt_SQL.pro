@@ -14,6 +14,8 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
+    Database_Connexion.h \
+    Utils.h \
     mainwindow.h
 
 FORMS += \

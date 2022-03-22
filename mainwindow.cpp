@@ -2,12 +2,12 @@
 #include "Database_Connexion.h"
 #include "Utils.h"
 #include "ui_mainwindow.h"
-#include "QMessageBox"
 #include "qdebug.h"
 #include "QPixmap"
+#include <typeinfo>
 
 
-DatabaseConnexion conn;
+
 Utils util;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -15,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    DatabaseConnexion conn;
     conn.database_connexion();
     QPixmap LogoThales("C:/Users/Julian/Documents/Qt_SQL/logo.jpg");
     int w = ui->LogoThales->width();
@@ -40,16 +41,19 @@ void MainWindow::on_LoginButton_clicked()
             qDebug("Adresse mail valide");
 
             if(!passwordInput.isEmpty() && !passwordInput.isNull()){
-                conn.CheckLogin(emailInput, passwordInput);
+                //conn.check_login(emailInput, passwordInput);
+            }
+            else{
+                util.sendMessageBox(parentWidget(),"Champ mot de passe incorrecte", "Veuillez renseigner le mot de passe");
             }
 
         }else{
-            QMessageBox::warning(this, "Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
+            util.sendMessageBox(parentWidget(), "Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
             return;
         }
 
     }else{
-        QMessageBox::warning(this, "Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
+        util.sendMessageBox(parentWidget(), "Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
         return;
     }
 

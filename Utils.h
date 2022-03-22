@@ -2,7 +2,8 @@
 #define UTILS_H
 #include <string>
 #include <regex>
-
+#include "QMessageBox"
+#include "QWidget"
 
 class Utils{
 public:
@@ -19,6 +20,15 @@ public:
        } else{
            return false;
        }
+    }
+
+    void sendMessageBox(QWidget *parent, std::string title, std::string message){
+        QMessageBox msgbox;
+        msgbox.setText(title.c_str());
+        msgbox.setInformativeText(message.c_str());
+        msgbox.setStandardButtons(QMessageBox::Ok);
+        msgbox.exec();
+
     }
 };
 

@@ -5,6 +5,7 @@
 #include <QSqlDatabase>
 #include "qdebug.h"
 #include "QMessageBox"
+#include "QSqlQuery"
 
 class DatabaseConnexion{
 
@@ -34,7 +35,26 @@ public:
         }
         return false;
     }
+
+    QString CheckLogin(QString $email, QString $password){
+        QSqlQuery query;
+        query.prepare("SELECT * FROM users WHERE email = :email and password = :password");
+        query.bindValue(":email",$email);
+        query.bindValue(":password", $password);
+        query.exec();
+
+
+        while (query.next()) {
+                 QString result = query.value(0).toString();
+                 qDebug() << result;
+             }
+        return "";
+
+    }
 };
+
+
+
 
 
 

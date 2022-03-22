@@ -6,10 +6,6 @@
 #include "qdebug.h"
 #include "QPixmap"
 
-#include <iostream>
-#include <string>
-#include <regex>
-
 
 DatabaseConnexion conn;
 Utils util;
@@ -36,11 +32,28 @@ MainWindow::~MainWindow()
 void MainWindow::on_LoginButton_clicked()
 {
     QString emailInput = ui->emailLineEdit->text();
-    if(!emailInput.isEmpty() && !emailInput.isNull() && util.is_email_valid(emailInput.toStdString())){
-        qDebug("Valid Address mail");
+    QString passwordInput = ui->passwordLineEdit->text();
+
+    if(!emailInput.isEmpty() && !emailInput.isNull()){
+
+        if(util.is_email_valid(emailInput.toStdString())){
+            qDebug("Adresse mail valide");
+
+            if(!passwordInput.isEmpty() && !passwordInput.isNull()){
+                conn.CheckLogin(emailInput, passwordInput);
+            }
+
+        }else{
+            QMessageBox::warning(this, "Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
+            return;
+        }
+
     }else{
-        QMessageBox::warning(this, "Champs invalide", "Veuillez vérifier que votre adresse mail est valide.");
+        QMessageBox::warning(this, "Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
+        return;
     }
+
+
 
 }
 

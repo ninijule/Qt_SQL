@@ -11,7 +11,7 @@ class DatabaseConnexion{
 
 public:
     bool database_connexion();
-    bool check_login(QString email, QString password);
+    bool CheckLogin(QString email, QString password);
 
 
 private:

@@ -1,16 +1,16 @@
 #ifndef USER_H
 #define USER_H
+#include "QString"
 
-#include "qdebug.h"
+class User
+{
+public:
+    User();
+    User(QString email, QString password);
 
-
-class User {
 private:
     QString email;
     QString password;
-
-public:
-
 };
 
 #endif // USER_H

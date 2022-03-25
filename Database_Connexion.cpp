@@ -23,7 +23,7 @@
         return false;
     }
 
-    bool CheckLogin(QString $email, QString $password){
+    bool DatabaseConnexion::CheckLogin(QString $email, QString $password){
         QSqlQuery query;
         query.prepare("SELECT * FROM users WHERE email = :email and password = :password");
         query.bindValue(":email",$email);

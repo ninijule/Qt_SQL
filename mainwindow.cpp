@@ -4,24 +4,23 @@
 #include "ui_mainwindow.h"
 #include "qdebug.h"
 #include "QPixmap"
-#include <typeinfo>
-
+#include "signup.h"
 
 
 Utils util;
+DatabaseConnexion conn;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    DatabaseConnexion conn;
     conn.database_connexion();
     QPixmap LogoThales("C:/Users/Julian/Documents/Qt_SQL/logo.jpg");
-    int w = ui->LogoThales->width();
-    int h = ui->LogoThales->height();
-    ui->LogoThales->setPixmap(LogoThales.scaled(w,h, Qt::KeepAspectRatio));
+    ui->LogoThales->setPixmap(LogoThales.scaled(300,150, Qt::KeepAspectRatio));
     ui->LogoThales->setAlignment(Qt::AlignCenter);
+
+
 }
 
 MainWindow::~MainWindow()
@@ -34,6 +33,7 @@ void MainWindow::on_LoginButton_clicked()
 {
     QString emailInput = ui->emailLineEdit->text();
     QString passwordInput = ui->passwordLineEdit->text();
+    bool userLogged = false;
 
     if(!emailInput.isEmpty() && !emailInput.isNull()){
 
@@ -41,19 +41,25 @@ void MainWindow::on_LoginButton_clicked()
             qDebug("Adresse mail valide");
 
             if(!passwordInput.isEmpty() && !passwordInput.isNull()){
-                //conn.check_login(emailInput, passwordInput);
+                userLogged = conn.CheckLogin(emailInput, passwordInput);
+                if(userLogged){
+
+                }else{
+                    util.sendMessageBox("Erreur mauvaise combinaison Email / Mot de passe", "Aucun utilisateur trouvé avec ces informations");
+                    ui->passwordLineEdit->setText("");
+                }
             }
             else{
-                util.sendMessageBox(parentWidget(),"Champ mot de passe incorrecte", "Veuillez renseigner le mot de passe");
+                util.sendMessageBox("Champ mot de passe incorrecte", "Veuillez renseigner le mot de passe");
             }
 
         }else{
-            util.sendMessageBox(parentWidget(), "Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
+            util.sendMessageBox("Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
             return;
         }
 
     }else{
-        util.sendMessageBox(parentWidget(), "Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
+        util.sendMessageBox("Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
         return;
     }
 
@@ -64,6 +70,10 @@ void MainWindow::on_LoginButton_clicked()
 
 void MainWindow::on_RegisterButton_clicked()
 {
+
+    MainWindow::setEnabled(false);
+    signup = new SignUp(this);
+    signup->show();
 
 }
 

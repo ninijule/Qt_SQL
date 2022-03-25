@@ -12,18 +12,25 @@ CONFIG += c++11
 SOURCES += \
     Database_Connexion.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    signup.cpp \
+    user.cpp
 
 HEADERS += \
     Database_Connexion.h \
-    User.h \
     Utils.h \
-    mainwindow.h
+    mainwindow.h \
+    signup.h \
+    user.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    signup.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    background.qrc

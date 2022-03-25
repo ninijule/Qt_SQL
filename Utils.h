@@ -22,7 +22,7 @@ public:
        }
     }
 
-    void sendMessageBox(QWidget *parent, std::string title, std::string message){
+    void sendMessageBox(std::string title, std::string message){
         QMessageBox msgbox;
         msgbox.setText(title.c_str());
         msgbox.setInformativeText(message.c_str());

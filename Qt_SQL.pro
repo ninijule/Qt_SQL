@@ -14,14 +14,15 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     signup.cpp \
-    user.cpp
+    user.cpp \
+    utils.cpp
 
 HEADERS += \
     Database_Connexion.h \
-    Utils.h \
     mainwindow.h \
     signup.h \
-    user.h
+    user.h \
+    utils.h
 
 FORMS += \
     mainwindow.ui \

@@ -1,27 +1,18 @@
 #ifndef UTILS_H
 #define UTILS_H
-#include <string>
-#include <regex>
+
+#include "string"
 
 
-class Utils{
+class Utils
+{
 public:
-    bool is_email_valid(const std::string& email)
-    {
-       // define a regular expression
-        const std::regex pattern
-              ("(\\w+)(\\.|_)?(\\w*)@(\\w+)(\\.(\\w+))+");
+    Utils();
+    void sendMessageBox(std::string title, std::string message);
+    bool is_email_valid(const std::string& email);
 
+private:
 
-       // try to match the string with the regular expression
-       if(std::regex_match(email, pattern)){
-           return true;
-       } else{
-           return false;
-       }
-    }
 };
-
-
 
 #endif // UTILS_H

@@ -1,17 +1,13 @@
 #include "mainwindow.h"
-#include "Database_Connexion.h"
 #include "Utils.h"
 #include "ui_mainwindow.h"
-#include "QMessageBox"
 #include "qdebug.h"
 #include "QPixmap"
+#include "signup.h"
+#include "db_connexion.h"
+#include <QCloseEvent>
 
-#include <iostream>
-#include <string>
-#include <regex>
 
-
-DatabaseConnexion conn;
 Utils util;
 
 MainWindow::MainWindow(QWidget *parent)
@@ -19,12 +15,13 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    conn.database_connexion();
     QPixmap LogoThales("C:/Users/Julian/Documents/Qt_SQL/logo.jpg");
-    int w = ui->LogoThales->width();
-    int h = ui->LogoThales->height();
-    ui->LogoThales->setPixmap(LogoThales.scaled(w,h, Qt::KeepAspectRatio));
+    ui->LogoThales->setPixmap(LogoThales.scaled(300,150, Qt::KeepAspectRatio));
     ui->LogoThales->setAlignment(Qt::AlignCenter);
+    db_connexion::ReturnSelf().Connexion();
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -32,15 +29,47 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+db_connexion& db_connexion::ReturnSelf() {
+    static db_connexion s_myClass;
+    return s_myClass;
+}
+
 
 void MainWindow::on_LoginButton_clicked()
 {
     QString emailInput = ui->emailLineEdit->text();
-    if(!emailInput.isEmpty() && !emailInput.isNull() && util.is_email_valid(emailInput.toStdString())){
-        qDebug("Valid Address mail");
+    QString passwordInput = ui->passwordLineEdit->text();
+    bool userLogged = false;
+
+    if(!emailInput.isEmpty() && !emailInput.isNull()){
+
+        if(util.is_email_valid(emailInput.toStdString())){
+            qDebug("Adresse mail valide");
+
+            if(!passwordInput.isEmpty() && !passwordInput.isNull()){
+                userLogged = db_connexion::ReturnSelf().CheckLogin(emailInput, passwordInput);
+                if(userLogged){
+
+                }else{
+                    util.sendMessageBox("Erreur mauvaise combinaison Email / Mot de passe", "Aucun utilisateur trouvé avec ces informations");
+                    ui->passwordLineEdit->setText("");
+                }
+            }
+            else{
+                util.sendMessageBox("Champ mot de passe incorrecte", "Veuillez renseigner le mot de passe");
+            }
+
+        }else{
+            util.sendMessageBox("Champs invalide Email", "Veuillez vérifier que l'adresse mail est valide.");
+            return;
+        }
+
     }else{
-        QMessageBox::warning(this, "Champs invalide", "Veuillez vérifier que votre adresse mail est valide.");
+        util.sendMessageBox("Champs vide Email", "Veuillez vérifier que l'adresse mail n'est pas vide.");
+        return;
     }
+
+
 
 }
 
@@ -48,7 +77,18 @@ void MainWindow::on_LoginButton_clicked()
 void MainWindow::on_RegisterButton_clicked()
 {
 
+    MainWindow::setEnabled(false);
+    signup = new SignUp(this);
+    signup->show();
+    connect(signup, SIGNAL(enableMainWindow()), this, SLOT(enableMainWindow()));
+
 }
+
+void MainWindow::enableMainWindow()
+{
+     this->setEnabled(true);
+}
+
 
 
 void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)

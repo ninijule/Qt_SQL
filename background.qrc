@@ -1,0 +1,5 @@
+<RCC>
+    <qresource prefix="/background">
+        <file>fond Thales.png</file>
+    </qresource>
+</RCC>

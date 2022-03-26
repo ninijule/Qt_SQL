@@ -4,7 +4,6 @@
 #include "user.h"
 #include "db_connexion.h"
 #include "mainwindow.h"
-#include <QCloseEvent>
 
 Utils utils;
 
@@ -32,7 +31,6 @@ void SignUp::on_registerButton_clicked()
     if(utils.is_email_valid(email.toStdString())){
         qDebug("Email valide");
         if(password == passwordConfirmation){
-
             User user(email, password);
             bool createdUser = db_connexion::ReturnSelf().CreateUser(user);
             if(createdUser){

@@ -1,24 +1,25 @@
 #include "mainwindow.h"
-#include "Database_Connexion.h"
 #include "Utils.h"
 #include "ui_mainwindow.h"
 #include "qdebug.h"
 #include "QPixmap"
 #include "signup.h"
+#include "db_connexion.h"
+#include <QCloseEvent>
 
 
 Utils util;
-DatabaseConnexion conn;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    conn.database_connexion();
     QPixmap LogoThales("C:/Users/Julian/Documents/Qt_SQL/logo.jpg");
     ui->LogoThales->setPixmap(LogoThales.scaled(300,150, Qt::KeepAspectRatio));
     ui->LogoThales->setAlignment(Qt::AlignCenter);
+    db_connexion::ReturnSelf().Connexion();
+
 
 
 }
@@ -26,6 +27,11 @@ MainWindow::MainWindow(QWidget *parent)
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+db_connexion& db_connexion::ReturnSelf() {
+    static db_connexion s_myClass;
+    return s_myClass;
 }
 
 
@@ -41,7 +47,7 @@ void MainWindow::on_LoginButton_clicked()
             qDebug("Adresse mail valide");
 
             if(!passwordInput.isEmpty() && !passwordInput.isNull()){
-                userLogged = conn.CheckLogin(emailInput, passwordInput);
+                userLogged = db_connexion::ReturnSelf().CheckLogin(emailInput, passwordInput);
                 if(userLogged){
 
                 }else{
@@ -74,8 +80,15 @@ void MainWindow::on_RegisterButton_clicked()
     MainWindow::setEnabled(false);
     signup = new SignUp(this);
     signup->show();
+    connect(signup, SIGNAL(enableMainWindow()), this, SLOT(enableMainWindow()));
 
 }
+
+void MainWindow::enableMainWindow()
+{
+     this->setEnabled(true);
+}
+
 
 
 void MainWindow::on_lineEdit_2_textChanged(const QString &arg1)

@@ -7,6 +7,9 @@ class User
 public:
     User();
     User(QString email, QString password);
+    ~User();
+    QString getEmail();
+    QString getPassword();
 
 private:
     QString email;

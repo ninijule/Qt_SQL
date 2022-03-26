@@ -20,10 +20,10 @@ public:
 
 private slots:
     void on_LoginButton_clicked();
-
     void on_RegisterButton_clicked();
-
     void on_lineEdit_2_textChanged(const QString &arg1);
+    void enableMainWindow();
+
 
 private:
     Ui::MainWindow *ui;

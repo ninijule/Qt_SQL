@@ -10,7 +10,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Database_Connexion.cpp \
+    db_connexion.cpp \
     main.cpp \
     mainwindow.cpp \
     signup.cpp \
@@ -18,7 +18,7 @@ SOURCES += \
     utils.cpp
 
 HEADERS += \
-    Database_Connexion.h \
+    db_connexion.h \
     mainwindow.h \
     signup.h \
     user.h \

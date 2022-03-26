@@ -3,6 +3,7 @@
 
 #include <QDialog>
 
+
 namespace Ui {
 class SignUp;
 }
@@ -15,11 +16,18 @@ public:
     explicit SignUp(QWidget *parent = nullptr);
     ~SignUp();
 
+signals:
+    void enableMainWindow();
+
 private slots:
     void on_registerButton_clicked();
+    void enableFrameMainWindow();
+
 
 private:
     Ui::SignUp *ui;
+
+
 };
 
 #endif // SIGNUP_H

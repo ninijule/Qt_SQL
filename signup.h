@@ -23,7 +23,6 @@ private slots:
     void on_registerButton_clicked();
     void enableFrameMainWindow();
 
-
 private:
     Ui::SignUp *ui;
 

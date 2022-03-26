@@ -1,4 +1,7 @@
 #include "db_connexion.h"
+#include "Utils.h"
+
+Utils utilities;
 
 db_connexion::db_connexion()
 {
@@ -43,17 +46,15 @@ bool db_connexion::CheckLogin(QString $email, QString $password){
 bool db_connexion::CreateUser(User user){
     QString $email = user.getEmail();
     QString $password = user.getPassword();
-    qDebug("coc");
+
     QSqlQuery query;
     query.prepare("SELECT * FROM users WHERE email = :email");
     query.bindValue(":email", $email);
     query.exec();
 
-
     if (query.next()) {
-             QString result = query.value(1).toString();
-             qDebug() << result;
              qDebug("user already exist");
+             utilities.sendMessageBox("Erreur cette adresse mail est déjà utilisée.", "Veuillez en sélectionner une autre.");
              return false;
          }else{
 

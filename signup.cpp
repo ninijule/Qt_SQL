@@ -4,6 +4,7 @@
 #include "user.h"
 #include "db_connexion.h"
 #include "mainwindow.h"
+#include <QCloseEvent>
 
 Utils utils;
 
@@ -37,6 +38,7 @@ void SignUp::on_registerButton_clicked()
             if(createdUser){
                 this->close();
                 enableFrameMainWindow();
+                utils.sendMessageBox("Utilisateur crée avec succès!", "");
             }
         }
         else{
@@ -55,3 +57,4 @@ void SignUp::enableFrameMainWindow()
 {
       emit enableMainWindow();
 }
+

@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     db_connexion.cpp \
+    home.cpp \
     main.cpp \
     mainwindow.cpp \
     signup.cpp \
@@ -19,12 +20,14 @@ SOURCES += \
 
 HEADERS += \
     db_connexion.h \
+    home.h \
     mainwindow.h \
     signup.h \
     user.h \
     utils.h
 
 FORMS += \
+    home.ui \
     mainwindow.ui \
     signup.ui
 

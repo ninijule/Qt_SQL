@@ -67,3 +67,4 @@ bool db_connexion::CreateUser(User user){
     }
 
 }
+

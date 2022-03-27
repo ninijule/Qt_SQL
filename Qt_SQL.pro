@@ -10,6 +10,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    airplane.cpp \
     db_connexion.cpp \
     home.cpp \
     main.cpp \
@@ -19,6 +20,7 @@ SOURCES += \
     utils.cpp
 
 HEADERS += \
+    airplane.h \
     db_connexion.h \
     home.h \
     mainwindow.h \

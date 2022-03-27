@@ -17,6 +17,8 @@ public:
 
 private:
     Ui::Home *ui;
+    void tableWidget();
+
 };
 
 #endif // HOME_H

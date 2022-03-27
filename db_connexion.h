@@ -6,6 +6,7 @@
 #include "QMessageBox"
 #include "QSqlQuery"
 #include "user.h"
+#include "airplane.h"
 #include "string.h"
 
 class db_connexion

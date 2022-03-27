@@ -13,6 +13,59 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+  <widget class="QLabel" name="LogoThales">
+   <property name="geometry">
+    <rect>
+     <x>250</x>
+     <y>10</y>
+     <width>300</width>
+     <height>150</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+  </widget>
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>150</y>
+     <width>611</width>
+     <height>350</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>ID</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Référence d'avion</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Type de réacteur</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Monoplace</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Biplace</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Commande électriques</string>
+    </property>
+   </column>
+  </widget>
  </widget>
  <resources/>
  <connections/>

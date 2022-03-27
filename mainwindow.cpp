@@ -5,7 +5,8 @@
 #include "QPixmap"
 #include "signup.h"
 #include "db_connexion.h"
-#include <QCloseEvent>
+#include "user.h"
+#include "home.h"
 
 
 Utils util;
@@ -44,12 +45,15 @@ void MainWindow::on_LoginButton_clicked()
     if(!emailInput.isEmpty() && !emailInput.isNull()){
 
         if(util.is_email_valid(emailInput.toStdString())){
-            qDebug("Adresse mail valide");
 
             if(!passwordInput.isEmpty() && !passwordInput.isNull()){
-                userLogged = db_connexion::ReturnSelf().CheckLogin(emailInput, passwordInput);
+                User user(emailInput, passwordInput);
+                userLogged = db_connexion::ReturnSelf().CheckLogin(user.getEmail(), user.getPassword());
                 if(userLogged){
-
+                    qDebug("connected");
+                    this->close();
+                    home = new Home(this);
+                    home->show();
                 }else{
                     util.sendMessageBox("Erreur mauvaise combinaison Email / Mot de passe", "Aucun utilisateur trouvé avec ces informations");
                     ui->passwordLineEdit->setText("");

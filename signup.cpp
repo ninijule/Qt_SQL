@@ -56,3 +56,9 @@ void SignUp::enableFrameMainWindow()
       emit enableMainWindow();
 }
 
+void SignUp::closeEvent(QCloseEvent *event)
+{
+    qDebug("Closed Event");
+    enableFrameMainWindow();
+}
+

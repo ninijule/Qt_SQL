@@ -22,6 +22,7 @@ signals:
 private slots:
     void on_registerButton_clicked();
     void enableFrameMainWindow();
+    void closeEvent(QCloseEvent *event);
 
 private:
     Ui::SignUp *ui;

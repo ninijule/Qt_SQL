@@ -5,6 +5,7 @@
 #include <QtSql>
 #include <QSqlDatabase>
 #include "signup.h"
+#include "home.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -28,5 +29,6 @@ private slots:
 private:
     Ui::MainWindow *ui;
     SignUp *signup;
+    Home *home;
 };
 #endif // MAINWINDOW_H

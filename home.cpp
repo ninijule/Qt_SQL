@@ -24,7 +24,6 @@ Home::~Home()
 
 void Home::tableWidget(){
 
-        QSqlTableModel *mModel;
         mModel = new QSqlTableModel(this);
         mModel->setTable("airplane");
         mModel->select();
@@ -33,3 +32,15 @@ void Home::tableWidget(){
         ui->tableView->setModel(mModel);
 
 }
+
+void Home::on_refreshButton_clicked()
+{
+        mModel->select();
+}
+
+
+void Home::on_disconnectButton_clicked()
+{
+        this->close();
+}
+
